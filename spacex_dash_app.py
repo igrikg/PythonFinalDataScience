@@ -82,8 +82,10 @@ def get_pie_chart(entered_site):
               )
 def get_graph(entered_site, mass_range):
     df = spacex_df[['Launch Site','class',"Booster Version Category","Payload Mass (kg)"]]
+    site='all Sites'
     if entered_site != 'ALL':
         df  = df[df['Launch Site'] == entered_site]
+        site = entered_site
     #Range set
     df = df[df["Payload Mass (kg)"] > mass_range[0]]
     df = df[df["Payload Mass (kg)"] < mass_range[1]]
@@ -93,7 +95,8 @@ def get_graph(entered_site, mass_range):
             y="class",
             color="Booster Version Category",
             size='Payload Mass (kg)',
-            hover_data=['Payload Mass (kg)']
+            hover_data=['Payload Mass (kg)'],
+            title=f'Correletion between Payload and Success for {site}'
             )
     return fig
 
